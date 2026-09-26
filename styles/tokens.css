@@ -1,0 +1,70 @@
+/**
+ * Circuits&Soles — Design Tokens
+ * Source: Downloads/C&S/circuits-and-soles-design-tokens.md
+ * Role tokens only in components — never raw hex.
+ */
+
+:root {
+  /* Raw palette (source of truth) */
+  --color-charcoal: #1a1a1a;
+  --color-bone: #f7f4ed;
+  --color-concrete: #d1cec7;
+  --color-sage: #6b745f;
+  --color-clay: #c9795d;
+
+  /* Role tokens */
+  --color-bg-primary: var(--color-bone);
+  --color-bg-inverse: var(--color-charcoal);
+  --color-bg-muted: var(--color-concrete);
+
+  --color-text-primary: var(--color-charcoal);
+  --color-text-inverse: var(--color-bone);
+  --color-text-muted: #6b6b66; /* concrete darkened for AA contrast on bone */
+
+  --color-accent-primary: var(--color-sage); /* CTAs, active states, verified badges */
+  --color-accent-secondary: var(--color-clay); /* highlights, tags, editorial accents */
+
+  --color-border-default: var(--color-concrete);
+  --color-border-strong: var(--color-charcoal);
+
+  /* Typography */
+  --font-heading: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+  --text-3xl: 3.5rem;
+
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  /* Spacing & sizing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+}
+
+/* Usage rules:
+ * - sage = trust/action (buttons, verified badges, confirmations)
+ * - clay = warmth/culture (editorial tags, drop callouts)
+ * - Sora: headings, nav, buttons, logo only. Inter: body, prices, descriptions.
+ */
