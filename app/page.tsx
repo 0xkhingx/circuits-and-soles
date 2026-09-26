@@ -1,75 +1,111 @@
-import { Nav } from "@/components/ui";
-import { ListingCard } from "@/components/listing-card";
-import { products, stories } from "@/lib/data";
+import Image from "next/image";
 import Link from "next/link";
-import { Badge } from "@/components/ui";
+import { Nav } from "@/components/nav";
 
 export default function Home() {
-  const drops = products.filter((p) => p.isNewDrop);
   return (
-    <>
-      <Nav />
-      <main>
-        <section className="bg-bg-inverse text-text-inverse">
-          <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
-            <Badge tone="drop">Community-first marketplace</Badge>
-            <h1 className="mt-4 max-w-2xl font-heading text-3xl leading-tight md:text-5xl">
-              Real streetwear. Verified drops. Culture first.
+    <div className="min-h-screen bg-concrete/60 p-3 md:p-6">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-2xl bg-bg-primary">
+        <Nav />
+
+        {/* Headline row — Skot rhythm: big Sora left, quiet trust right */}
+        <section className="px-5 pt-2 md:px-8">
+          <div className="flex items-start justify-between gap-6">
+            <h1 className="max-w-xl font-heading text-3xl leading-tight md:text-5xl">
+              Super clean{" "}
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sage align-middle text-base text-white">
+                ⚡
+              </span>
+              <br />
+              verified heat
             </h1>
-            <p className="mt-4 max-w-xl text-text-inverse/80">
-              Curated sneakers + streetwear. Every pair checked before it lists. Buy via WhatsApp today — full checkout in test mode for demo.
-            </p>
-            <div className="mt-6 flex gap-3">
-              <Link href="/shop" className="rounded-md bg-sage px-5 py-2.5 font-heading text-sm text-white">
-                Shop drops
-              </Link>
-              <Link href="/culture" className="rounded-md border border-text-inverse/30 px-5 py-2.5 font-heading text-sm">
-                Read culture
-              </Link>
+            {/* Quiet trust signal */}
+            <div className="hidden shrink-0 text-right sm:block">
+              <div className="flex justify-end -space-x-2">
+                <span className="h-7 w-7 rounded-full border-2 border-bg-primary bg-sage" />
+                <span className="h-7 w-7 rounded-full border-2 border-bg-primary bg-clay" />
+                <span className="h-7 w-7 rounded-full border-2 border-bg-primary bg-charcoal text-center font-heading text-[10px] leading-6 text-white">
+                  +
+                </span>
+              </div>
+              <p className="mt-1 text-xs text-text-muted">2k+ community pickups</p>
+              <p className="text-xs text-sage">★★★★★</p>
             </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-4 py-12">
-          <div className="flex items-end justify-between">
-            <h2 className="font-heading text-xl">New drops</h2>
-            <Link href="/shop" className="text-sm text-text-muted underline">View all</Link>
-          </div>
-          <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {drops.map((p) => <ListingCard key={p.id} product={p} />)}
-          </div>
-        </section>
-
-        <section className="border-y border-border bg-bg-muted/30">
-          <div className="mx-auto max-w-6xl px-4 py-12">
-            <h2 className="font-heading text-xl">Verified listings</h2>
-            <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-4">
-              {products.slice(0, 4).map((p) => <ListingCard key={p.id} product={p} />)}
+        {/* Product stage — blob + circuit tile */}
+        <section className="px-5 pb-6 pt-4 md:px-8">
+          <div className="relative overflow-hidden rounded-2xl bg-concrete/50">
+            <Image
+              src="/assets/patterns/circuit-tile.png"
+              alt=""
+              fill
+              className="object-cover opacity-[0.15]"
+              priority={false}
+            />
+            {/* Blob */}
+            <div
+              aria-hidden
+              className="absolute left-1/2 top-1/2 h-[130%] w-[70%] -translate-x-1/2 -translate-y-1/2 bg-bg-primary"
+              style={{ borderRadius: "45% 55% 52% 48% / 55% 48% 52% 45%" }}
+            />
+            {/* Hero product — shoebox placeholder until sneaker cutout lands */}
+            <div className="relative mx-auto max-w-3xl px-6 py-10 md:py-14">
+              <Image
+                src="/assets/shoebox.png"
+                alt="Circuits&Soles verified drop"
+                width={1200}
+                height={450}
+                className="h-auto w-full object-contain"
+                priority
+              />
             </div>
-          </div>
-        </section>
 
-        <section className="mx-auto max-w-6xl px-4 py-12">
-          <h2 className="font-heading text-xl">From the culture</h2>
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
-            {stories.map((s) => (
-              <Link key={s.slug} href={`/culture/${s.slug}`} className="overflow-hidden rounded-md border border-border">
-                <div className="flex h-36 items-center justify-center bg-concrete/40 font-heading text-sm text-text-muted">
-                  {s.category}
-                </div>
-                <div className="p-4">
-                  <Badge tone="drop">{s.category}</Badge>
-                  <h3 className="mt-2 font-heading text-base">{s.headline}</h3>
-                  <p className="mt-1 text-sm text-text-muted">{s.readTime} read</p>
-                </div>
-              </Link>
-            ))}
+            {/* Meta block bottom-left */}
+            <div className="absolute bottom-5 left-5 max-w-[220px] rounded-xl bg-bg-primary/90 p-4 backdrop-blur">
+              <p className="font-heading text-xl">001</p>
+              <p className="text-xs text-text-muted">Verified Drop</p>
+              <p className="mt-2 text-xs leading-relaxed">
+                Every pair checked before it lists. Community-first, no fakes.
+              </p>
+            </div>
+
+            {/* Trending callout bottom-right — DB50QT pattern */}
+            <Link
+              href="/shop"
+              className="absolute bottom-5 right-5 flex items-center gap-3 rounded-xl bg-white/90 p-3 shadow-sm backdrop-blur"
+            >
+              <Image
+                src="/assets/logo/symbol-sage.png"
+                alt=""
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-lg bg-concrete/50 object-contain p-1"
+              />
+              <span>
+                <span className="block font-heading text-xs">AJ1 Mocha</span>
+                <span className="block text-[11px] text-text-muted">Trending alongside</span>
+              </span>
+            </Link>
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              href="/shop"
+              className="rounded-md bg-sage px-5 py-2.5 font-heading text-sm text-white"
+            >
+              Shop drops
+            </Link>
+            <Link
+              href="/about"
+              className="rounded-md border border-strong px-5 py-2.5 font-heading text-sm"
+            >
+              Our verification
+            </Link>
           </div>
         </section>
-      </main>
-      <footer className="border-t border-border py-8 text-center text-sm text-text-muted">
-        Circuits&Soles — catalog MVP · WhatsApp checkout live · Stripe test-mode for demo
-      </footer>
-    </>
+      </div>
+    </div>
   );
 }
