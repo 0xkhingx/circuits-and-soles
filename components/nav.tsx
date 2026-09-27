@@ -1,33 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SearchIcon, HeadsetIcon, ShoppingBagIcon } from "./icons";
 
 const links = [
-  { href: "/shop", label: "Shop" },
-  { href: "/culture", label: "Culture" },
-  { href: "/about", label: "About" },
-  { href: "/shop", label: "Drops" },
+  { href: "#", label: "About" },
+  { href: "#", label: "Collections" },
+  { href: "#", label: "Services" },
+  { href: "#", label: "Options" },
 ];
 
 export function Nav() {
   return (
-    <div className="flex items-center justify-between gap-4 px-5 py-4 md:px-8">
-      {/* Left: search + links (Skot-exact cluster) */}
-      <div className="flex flex-1 items-center gap-4">
+    <div className="grid grid-cols-[1fr_auto_1fr] items-center px-5 py-4 md:px-8">
+      {/* Left cluster: search anchor + text links */}
+      <div className="flex items-center gap-8">
         <button
           aria-label="Search"
-          className="flex h-9 w-9 items-center justify-center rounded-full bg-charcoal text-white"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-charcoal text-white"
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-            <circle cx="11" cy="11" r="7" />
-            <path d="m20 20-3.5-3.5" />
-          </svg>
+          <SearchIcon size={18} stroke={2.2} />
         </button>
-        <button aria-label="Menu" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white lg:hidden">
-          <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        </button>
-        <nav className="hidden items-center gap-5 font-heading text-[13px] text-text-primary lg:flex">
+        <nav className="hidden items-center gap-9 text-[13px] tracking-wide text-charcoal lg:flex">
           {links.map((l) => (
             <Link key={l.label} href={l.href} className="hover:opacity-60">
               {l.label}
@@ -36,54 +29,49 @@ export function Nav() {
         </nav>
       </div>
 
-      {/* Center: brand lockup — symbol image + Sora wordmark (avoids PNG matte issues) */}
-      <Link href="/" className="flex items-center gap-2" aria-label="Circuits&Soles home">
+      {/* Center: logo mark only, true horizontal center */}
+      <Link href="/" aria-label="Circuits&Soles home" className="justify-self-center">
         <Image
-          src="/assets/logo/symbol-sage.png"
+          src="/assets/logo/symbol.svg"
           alt=""
-          width={28}
-          height={28}
-          className="h-7 w-7 object-contain"
+          width={34}
+          height={34}
+          className="h-8 w-8"
+          priority
         />
-        <span className="hidden font-heading text-[17px] font-semibold tracking-tight sm:block">
-          circuits<span className="text-sage">&</span>soles
-        </span>
       </Link>
 
-      {/* Right: actions cluster */}
-      <div className="flex flex-1 items-center justify-end gap-2">
+      {/* Right cluster: toggle + contact + support + cart */}
+      <div className="flex items-center justify-end gap-2">
+        {/* Theme toggle — half black / half white split knob */}
         <button
-          aria-label="Notifications"
-          className="relative hidden h-9 w-9 items-center justify-center rounded-full border border-border bg-white sm:flex"
+          aria-label="Toggle theme"
+          className="hidden h-[34px] w-[70px] items-center rounded-full border border-black/10 bg-white px-1 sm:flex"
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6" />
-            <path d="M10 20a2 2 0 0 0 4 0" />
-          </svg>
-          <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-clay" />
+          <span
+            className="h-6 w-6 rounded-full border border-black/20"
+            style={{ background: "linear-gradient(90deg, #1A1A1A 50%, #ffffff 50%)" }}
+          />
         </button>
         <Link
-          href="/about"
-          className="hidden rounded-full border border-border bg-white px-4 py-2 font-heading text-[13px] md:block"
+          href="#"
+          className="hidden h-11 items-center rounded-full border border-black/10 bg-white px-5 text-[13px] font-medium text-charcoal md:flex"
         >
           Contact us
         </Link>
         <button
-          aria-label="Settings"
-          className="hidden h-9 w-9 items-center justify-center rounded-full border border-border bg-white sm:flex"
+          aria-label="Support"
+          className="hidden h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-charcoal sm:flex"
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <circle cx="12" cy="12" r="3" />
-            <path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2Z" />
-          </svg>
+          <HeadsetIcon size={18} stroke={2} />
         </button>
         <Link
-          href="/shop"
-          className="flex items-center gap-2 rounded-full bg-charcoal px-4 py-2 font-heading text-[13px] text-white"
+          href="#"
+          className="flex h-11 items-center gap-2 rounded-full border border-black/10 bg-white py-1.5 pl-5 pr-1.5 text-[13px] font-medium text-charcoal"
         >
           Cart
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-bone text-[11px] text-charcoal">
-            0
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-charcoal text-white">
+            <ShoppingBagIcon size={15} stroke={2} />
           </span>
         </Link>
       </div>
