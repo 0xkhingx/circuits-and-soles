@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { SearchIcon, UserIcon, ShoppingBagIcon } from "./icons";
 
 const links = [
@@ -11,6 +14,13 @@ const links = [
 // v1: logged-out static state. Swap to avatar -> /account when authed.
 const isLoggedIn = false;
 const cartCount = 0;
+
+const MLink = motion(Link);
+const tapProps = {
+  whileHover: { scale: 1.03 },
+  whileTap: { scale: 0.97 },
+  transition: { type: "spring" as const, stiffness: 400, damping: 25 },
+};
 
 export function Nav() {
   return (
@@ -48,31 +58,35 @@ export function Nav() {
 
       {/* Right cluster: search trigger + account + cart */}
       <div className="flex shrink-0 items-center justify-end gap-2">
-        <Link
+        <MLink
           href="/shop"
           aria-label="Search"
+          {...tapProps}
           className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-charcoal"
         >
           <SearchIcon size={18} stroke={2} />
-        </Link>
+        </MLink>
         {isLoggedIn ? (
-          <Link
+          <MLink
             href="/account"
             aria-label="Account"
+            {...tapProps}
             className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal text-white"
           >
             <UserIcon size={18} stroke={2} />
-          </Link>
+          </MLink>
         ) : (
-          <Link
+          <MLink
             href="/login"
+            {...tapProps}
             className="hidden h-10 items-center rounded-full border border-black/10 bg-white px-5 text-[13px] font-medium text-charcoal sm:flex"
           >
             Sign in
-          </Link>
+          </MLink>
         )}
-        <Link
+        <MLink
           href="/checkout"
+          {...tapProps}
           className="flex h-10 items-center gap-1.5 rounded-full border border-black/10 bg-white pl-4 pr-1.5 text-[13px] font-medium text-charcoal"
         >
           Cart
@@ -82,7 +96,7 @@ export function Nav() {
               {cartCount}
             </span>
           </span>
-        </Link>
+        </MLink>
       </div>
     </div>
   );

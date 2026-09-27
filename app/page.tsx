@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Nav } from "@/components/nav";
+import { HeroModel } from "@/components/hero-model";
 
 export default function Home() {
   return (
@@ -16,14 +17,7 @@ export default function Home() {
             className="object-cover opacity-[0.12]"
             priority={false}
           />
-          <Image
-            src="/hero-model.png"
-            alt="Streetwear fit — black sweatshirt, wide denim, white sneakers"
-            width={720}
-            height={900}
-            className="relative h-[calc(100svh-96px)] w-auto object-contain"
-            priority
-          />
+          <HeroModel />
         </section>
       </div>
     </div>
