@@ -11,7 +11,7 @@ const links = [
 
 export function Nav() {
   return (
-    <div className="grid grid-cols-[1fr_auto_1fr] items-center px-5 py-4 md:px-8">
+    <div className="relative flex items-center justify-between px-5 py-4 md:px-8">
       {/* Left cluster: search anchor + text links */}
       <div className="flex items-center gap-8">
         <button
@@ -29,8 +29,12 @@ export function Nav() {
         </nav>
       </div>
 
-      {/* Center: logo mark only, true horizontal center */}
-      <Link href="/" aria-label="Circuits&Soles home" className="justify-self-center">
+      {/* Center: logo mark only, pinned to the bar's exact midpoint */}
+      <Link
+        href="/"
+        aria-label="Circuits&Soles home"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+      >
         <Image
           src="/assets/logo/symbol.svg"
           alt=""
