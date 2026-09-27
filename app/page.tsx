@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Nav } from "@/components/nav";
 
 export default function Home() {
@@ -5,10 +6,25 @@ export default function Home() {
     <div className="min-h-screen bg-concrete/60 p-3 md:p-6">
       <div className="mx-auto max-w-7xl overflow-hidden rounded-2xl bg-bg-primary">
         <Nav />
-        {/* Hero removed — navbar focus. Empty canvas below. */}
-        <div className="flex h-64 items-center justify-center px-5 pb-10">
-          <p className="text-sm text-text-muted">Navbar canvas — hero goes here next.</p>
-        </div>
+
+        {/* Hero: model centered, background full-bleed */}
+        <section className="relative overflow-hidden bg-concrete/50">
+          <Image
+            src="/assets/patterns/circuit-tile.png"
+            alt=""
+            fill
+            className="object-cover opacity-[0.12]"
+            priority={false}
+          />
+          <Image
+            src="/hero-model.png"
+            alt="Streetwear fit — black sweatshirt, wide denim, white sneakers"
+            width={720}
+            height={900}
+            className="relative mx-auto h-auto max-h-[72vh] w-auto object-contain"
+            priority
+          />
+        </section>
       </div>
     </div>
   );
