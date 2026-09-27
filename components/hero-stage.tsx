@@ -16,17 +16,27 @@ export function HeroStage() {
         priority={false}
       />
 
-      {/* Scrolling words — visuals removed, type carries the hero */}
-      <div className="pointer-events-none absolute inset-0 flex items-center">
+      {/* Scrolling words — stepped down behind the wordmark */}
+      <div className="pointer-events-none absolute inset-0 flex items-center opacity-35">
         <TextStream
           items={WORDS}
-          prefix="Circuits&Soles"
-          fontSize="clamp(3rem, 10vw, 7rem)"
+          prefix=""
+          fontSize="clamp(2rem, 6vw, 4rem)"
           fontWeight={600}
           height="100%"
           className="w-full"
         />
       </div>
+
+      {/* Wordmark centerpiece */}
+      <Image
+        src="/assets/logo/wordmark.svg"
+        alt="Circuits&Soles"
+        width={866}
+        height={288}
+        className="relative z-10 h-auto w-[clamp(280px,60vw,640px)]"
+        priority
+      />
     </section>
   );
 }
