@@ -60,3 +60,22 @@ export function UserIcon(props: IconProps) {
     </Base>
   );
 }
+
+export function MenuIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M4 6l16 0" />
+      <path d="M4 12l16 0" />
+      <path d="M4 18l16 0" />
+    </Base>
+  );
+}
+
+export function CloseIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M18 6l-12 12" />
+      <path d="M6 6l12 12" />
+    </Base>
+  );
+}

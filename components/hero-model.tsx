@@ -8,7 +8,7 @@ export function HeroModel() {
   return (
     <motion.div
       animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      transition={{ duration: 6, repeat: Infinity, ease: [0.77, 0, 0.175, 1] }}
       className="relative"
     >
       <Image

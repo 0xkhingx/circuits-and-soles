@@ -3,11 +3,11 @@ import { HeroStage } from "@/components/hero-stage";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-concrete/60 p-3 md:p-6">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-2xl bg-bg-primary">
+    <div className="min-h-screen bg-bg-primary">
+      <div className="mx-auto max-w-7xl">
         <Nav />
-        <HeroStage />
       </div>
+      <HeroStage />
     </div>
   );
 }
