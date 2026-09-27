@@ -7,8 +7,8 @@ export default function Home() {
       <div className="mx-auto max-w-7xl overflow-hidden rounded-2xl bg-bg-primary">
         <Nav />
 
-        {/* Hero: model centered, background full-bleed */}
-        <section className="relative overflow-hidden bg-concrete/50">
+        {/* Hero: model centered, viewport-filling stage */}
+        <section className="relative flex min-h-[calc(100svh-64px)] items-center justify-center overflow-hidden bg-concrete/50">
           <Image
             src="/assets/patterns/circuit-tile.png"
             alt=""
@@ -21,7 +21,7 @@ export default function Home() {
             alt="Streetwear fit — black sweatshirt, wide denim, white sneakers"
             width={720}
             height={900}
-            className="relative mx-auto h-auto max-h-[72vh] w-auto object-contain"
+            className="relative h-auto max-h-[calc(100svh-96px)] w-auto object-contain"
             priority
           />
         </section>
