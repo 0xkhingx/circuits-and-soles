@@ -21,7 +21,7 @@ export default function Home() {
             alt="Streetwear fit — black sweatshirt, wide denim, white sneakers"
             width={720}
             height={900}
-            className="relative h-auto max-h-[calc(100svh-96px)] w-auto object-contain"
+            className="relative h-[calc(100svh-96px)] w-auto object-contain"
             priority
           />
         </section>
