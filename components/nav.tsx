@@ -12,17 +12,17 @@ const links = [
 export function Nav() {
   return (
     <div className="relative flex items-center justify-between px-5 py-4 md:px-8">
-      {/* Left cluster: search anchor + text links */}
-      <div className="flex items-center gap-8">
+      {/* Left cluster: search anchor + all four text links, locked left, no wrap */}
+      <div className="flex min-w-0 items-center gap-8">
         <button
           aria-label="Search"
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-charcoal text-white"
         >
           <SearchIcon size={18} stroke={2.2} />
         </button>
-        <nav className="hidden items-center gap-9 text-[13px] tracking-wide text-charcoal lg:flex">
+        <nav className="hidden min-w-0 items-center gap-8 whitespace-nowrap text-[13px] tracking-wide text-charcoal lg:flex">
           {links.map((l) => (
-            <Link key={l.label} href={l.href} className="hover:opacity-60">
+            <Link key={l.label} href={l.href} className="shrink-0 hover:opacity-60">
               {l.label}
             </Link>
           ))}
@@ -45,18 +45,8 @@ export function Nav() {
         />
       </Link>
 
-      {/* Right cluster: toggle + contact + support + cart */}
-      <div className="flex items-center justify-end gap-2">
-        {/* Theme toggle — half black / half white split knob */}
-        <button
-          aria-label="Toggle theme"
-          className="hidden h-[34px] w-[70px] items-center rounded-full border border-black/10 bg-white px-1 sm:flex"
-        >
-          <span
-            className="h-6 w-6 rounded-full border border-black/20"
-            style={{ background: "linear-gradient(90deg, #1A1A1A 50%, #ffffff 50%)" }}
-          />
-        </button>
+      {/* Right cluster: contact + support + cart */}
+      <div className="flex shrink-0 items-center justify-end gap-2">
         <Link
           href="#"
           className="hidden h-11 items-center rounded-full border border-black/10 bg-white px-5 text-[13px] font-medium text-charcoal md:flex"
