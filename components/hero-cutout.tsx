@@ -1,81 +1,91 @@
 "use client";
 
+import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
-export type CutoutKind = "sneakers" | "streetwear" | "none";
+const SHOES = [
+  { src: "/popouts/sneaker-1.png", alt: "Black and cream low sneaker", tilt: "-rotate-6", pos: "left-0 top-6 w-[clamp(200px,24vw,340px)]" },
+  { src: "/popouts/sneaker-2.png", alt: "Black high-top sneaker with sage tags", tilt: "rotate-3", pos: "left-[24%] top-0 w-[clamp(220px,26vw,370px)]" },
+  { src: "/popouts/sneaker-3.png", alt: "Cream and black runner", tilt: "rotate-[10deg]", pos: "left-[48%] top-10 w-[clamp(200px,24vw,340px)]" },
+];
 
-// Placeholder stand-ins with the real geometry: angled panel + soft
-// ground shadow. Swap for transparent PNGs at
-// public/popouts/sneakers.png / streetwear.png when assets land.
-function Placeholder({
-  label,
-  sub,
-  tone,
+function Shoe({
+  src,
+  alt,
   tilt,
+  pos,
+  hideOnMobile,
 }: {
-  label: string;
-  sub: string;
-  tone: string;
+  src: string;
+  alt: string;
   tilt: string;
+  pos: string;
+  hideOnMobile?: boolean;
 }) {
   return (
-    <div className="relative">
-      <div
-        className={`flex h-[38svh] w-[26svw] min-h-[280px] min-w-[220px] max-w-[360px] flex-col items-center justify-center gap-2 rounded-2xl border border-black/10 ${tone} ${tilt} shadow-beautiful-sm`}
-      >
-        <span className="font-heading text-sm tracking-[0.2em]">{label}</span>
-        <span className="text-xs text-text-muted">{sub}</span>
-      </div>
+    <div className={`absolute ${pos} ${tilt} ${hideOnMobile ? "hidden sm:block" : ""}`}>
+      <Image
+        src={src}
+        alt={alt}
+        width={750}
+        height={750}
+        className="h-auto w-full object-contain drop-shadow-[0_24px_24px_rgba(26,26,26,0.25)]"
+        priority={false}
+      />
       {/* Soft ground shadow */}
-      <div className="absolute -bottom-6 left-1/2 h-8 w-4/5 -translate-x-1/2 rounded-full bg-black/20 blur-xl" />
+      <div className="mx-auto h-6 w-3/4 rounded-full bg-black/20 blur-xl" />
     </div>
   );
 }
 
+// Sneaker cluster — active on the Sneakers word only. Streetwear and
+// Community stay type-only until those assets land.
 export function HeroCutout({ active }: { active: number }) {
   const reduceMotion = useReducedMotion();
-  const kind: CutoutKind =
-    active === 0 ? "sneakers" : active === 1 ? "streetwear" : "none";
 
   if (reduceMotion) {
-    return (
-      <div className="absolute right-[4vw] top-1/2 z-0 -translate-y-[30%]">
-        <Placeholder
-          label="SNEAKER"
-          sub="angled placeholder"
-          tone="bg-sage/25"
-          tilt="-rotate-6"
-        />
+    return active === 0 ? (
+      <div className="pointer-events-none absolute right-[2vw] top-1/2 z-0 w-[46vw] max-w-[560px] -translate-y-[30%]">
+        <div className="relative h-[300px]">
+          <Shoe {...SHOES[0]} />
+        </div>
       </div>
-    );
+    ) : null;
   }
 
   return (
-    <div className="pointer-events-none absolute right-[4vw] top-1/2 z-0 -translate-y-[30%]">
+    <div className="pointer-events-none absolute right-[2vw] top-1/2 z-0 w-[46vw] max-w-[560px] -translate-y-[30%]">
       <AnimatePresence mode="popLayout">
-        {kind !== "none" && (
+        {active === 0 && (
           <motion.div
-            key={kind}
-            initial={{ opacity: 0, y: 24, filter: "blur(2px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -16, filter: "blur(2px)" }}
-            transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+            key="sneaker-cluster"
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.06 } },
+              exit: { opacity: 0, y: -16, filter: "blur(2px)", transition: { duration: 0.35 } },
+            }}
+            className="relative h-[clamp(280px,38svh,420px)]"
           >
-            {kind === "sneakers" ? (
-              <Placeholder
-                label="SNEAKER"
-                sub="angled placeholder"
-                tone="bg-sage/25"
-                tilt="-rotate-6"
-              />
-            ) : (
-              <Placeholder
-                label="HOODIE"
-                sub="placeholder"
-                tone="bg-clay/25"
-                tilt="rotate-3"
-              />
-            )}
+            {SHOES.map((s, i) => (
+              <motion.div
+                key={s.src}
+                variants={{
+                  hidden: { opacity: 0, y: 32, filter: "blur(2px)" },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    filter: "blur(0px)",
+                    transition: { duration: 0.5, ease: [0.23, 1, 0.32, 1] },
+                  },
+                }}
+                className="absolute inset-0"
+              >
+                <Shoe {...s} hideOnMobile={i > 0} />
+              </motion.div>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
