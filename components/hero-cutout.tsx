@@ -64,13 +64,13 @@ export function HeroCutout({ active }: { active: number }) {
   if (reduceMotion) {
     if (active === 1) {
       return (
-        <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 opacity-60">
           <FitCard />
         </div>
       );
     }
     return active === 0 ? (
-      <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 w-[70vw] max-w-[900px] -translate-x-1/2 -translate-y-1/2">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[70vw] max-w-[900px] -translate-x-1/2 -translate-y-1/2 opacity-60">
         <div className="relative h-[300px]">
           <Shoe {...SHOES[0]} />
         </div>
@@ -79,7 +79,7 @@ export function HeroCutout({ active }: { active: number }) {
   }
 
   return (
-    <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 w-[70vw] max-w-[900px] -translate-x-1/2 -translate-y-1/2">
+    <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[70vw] max-w-[900px] -translate-x-1/2 -translate-y-1/2 opacity-60 [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,black_55%,transparent_100%)]">
       <AnimatePresence mode="popLayout">
         {active === 0 && (
           <motion.div
