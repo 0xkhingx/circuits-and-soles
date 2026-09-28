@@ -38,12 +38,40 @@ function Shoe({
   );
 }
 
-// Sneaker cluster — active on the Sneakers word only. Streetwear and
-// Community stay type-only until those assets land.
+// Sneaker cluster on the Sneakers beat, framed fit card on the
+// Streetwear beat, type-only on Community.
+const beatTransition = (delay = 0) => ({
+  duration: 0.5,
+  delay,
+  ease: [0.23, 1, 0.32, 1] as const,
+});
+
+function FitCard() {
+  return (
+    <div className="rotate-2 rounded-2xl border border-black/10 bg-bg-primary p-2 shadow-beautiful-sm">
+      <Image
+        src="/popouts/fit-hoodie.png"
+        alt="Forest Circuits&Soles hoodie with grey sweatpants"
+        width={600}
+        height={900}
+        className="h-[34svh] min-h-[260px] w-auto rounded-xl object-cover"
+        priority={false}
+      />
+    </div>
+  );
+}
+
 export function HeroCutout({ active }: { active: number }) {
   const reduceMotion = useReducedMotion();
 
   if (reduceMotion) {
+    if (active === 1) {
+      return (
+        <div className="pointer-events-none absolute right-[2vw] top-1/2 z-0 -translate-y-[30%]">
+          <FitCard />
+        </div>
+      );
+    }
     return active === 0 ? (
       <div className="pointer-events-none absolute right-[2vw] top-1/2 z-0 w-[46vw] max-w-[560px] -translate-y-[30%]">
         <div className="relative h-[300px]">
@@ -78,7 +106,7 @@ export function HeroCutout({ active }: { active: number }) {
                     opacity: 1,
                     y: 0,
                     filter: "blur(0px)",
-                    transition: { duration: 0.5, ease: [0.23, 1, 0.32, 1] },
+                    transition: beatTransition(),
                   },
                 }}
                 className="absolute inset-0"
@@ -86,6 +114,18 @@ export function HeroCutout({ active }: { active: number }) {
                 <Shoe {...s} hideOnMobile={i > 0} />
               </motion.div>
             ))}
+          </motion.div>
+        )}
+        {active === 1 && (
+          <motion.div
+            key="fit-card"
+            initial={{ opacity: 0, y: 32, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -16, filter: "blur(2px)", transition: { duration: 0.35 } }}
+            transition={beatTransition()}
+            className="relative flex justify-end"
+          >
+            <FitCard />
           </motion.div>
         )}
       </AnimatePresence>
