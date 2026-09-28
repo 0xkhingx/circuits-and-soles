@@ -4,9 +4,9 @@ import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const SHOES = [
-  { src: "/popouts/sneaker-1.png", alt: "Black and cream low sneaker", tilt: "-rotate-6", pos: "left-0 top-6 w-[clamp(200px,24vw,340px)]" },
-  { src: "/popouts/sneaker-2.png", alt: "Black high-top sneaker with sage tags", tilt: "rotate-3", pos: "left-[24%] top-0 w-[clamp(220px,26vw,370px)]" },
-  { src: "/popouts/sneaker-3.png", alt: "Cream and black runner", tilt: "rotate-[10deg]", pos: "left-[48%] top-10 w-[clamp(200px,24vw,340px)]" },
+  { src: "/popouts/sneaker-1.png", alt: "Tan and navy bandana-pattern dunk-style sneaker", tilt: "-rotate-6", pos: "left-0 top-6 w-[clamp(200px,24vw,340px)]" },
+  { src: "/popouts/sneaker-2.png", alt: "Olive white and black high-top sneaker", tilt: "rotate-3", pos: "left-[24%] top-0 w-[clamp(220px,26vw,370px)]" },
+  { src: "/popouts/sneaker-3.png", alt: "Green cream and red star graphic sneaker", tilt: "rotate-[10deg]", pos: "left-[48%] top-10 w-[clamp(200px,24vw,340px)]" },
 ];
 
 function Shoe({
