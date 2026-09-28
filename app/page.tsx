@@ -10,7 +10,7 @@ export default function Home() {
         src="/assets/patterns/circuit-tile.png"
         alt=""
         fill
-        className="object-cover opacity-[0.12]"
+        className="object-cover opacity-[0.07] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_45%,black_30%,transparent_75%)]"
         priority={false}
       />
       <div className="relative">

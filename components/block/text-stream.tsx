@@ -179,7 +179,7 @@ export function TextStream({
         alignItems: "center",
         justifyContent: "center",
         height,
-        gap: "0.5rem",
+        gap: "1.5rem",
         ...style,
       }}
     >
@@ -206,9 +206,9 @@ export function TextStream({
           height: `calc(${typeof fontSize === "string" ? fontSize : fontSize + "px"} * 2.2)`,
           overflow: "hidden",
           maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
+            "linear-gradient(to bottom, transparent 0%, black 45%, black 70%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
+            "linear-gradient(to bottom, transparent 0%, black 45%, black 70%, transparent 100%)",
           textAlign: "center",
         }}
       >
