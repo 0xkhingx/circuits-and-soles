@@ -1,20 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { TextStream } from "./block/text-stream";
 
 const WORDS = ["Sneakers", "Streetwear", "Community", "Culture"];
 
 export function HeroStage() {
   return (
-    <section className="relative flex min-h-[calc(100svh-64px)] items-center justify-center overflow-hidden bg-bg-primary">
-      <Image
-        src="/assets/patterns/circuit-tile.png"
-        alt=""
-        fill
-        className="object-cover opacity-[0.12]"
-        priority={false}
-      />
+    <section className="relative flex min-h-[calc(100svh-64px)] items-center justify-center overflow-hidden bg-transparent">
 
       {/* Scrolling words carry the hero */}
       <div className="pointer-events-none absolute inset-0 flex items-center">
