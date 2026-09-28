@@ -4,9 +4,9 @@ import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const SHOES = [
-  { src: "/popouts/sneaker-1.png", alt: "Tan and navy bandana-pattern dunk-style sneaker", tilt: "-rotate-6", pos: "left-0 top-6 w-[clamp(200px,24vw,340px)]" },
-  { src: "/popouts/sneaker-2.png", alt: "Olive white and black high-top sneaker", tilt: "rotate-3", pos: "left-[24%] top-0 w-[clamp(220px,26vw,370px)]" },
-  { src: "/popouts/sneaker-3.png", alt: "Green cream and red star graphic sneaker", tilt: "rotate-[10deg]", pos: "left-[48%] top-10 w-[clamp(200px,24vw,340px)]" },
+  { src: "/popouts/sneaker-1.png", alt: "Tan and navy bandana-pattern dunk-style sneaker", tilt: "-rotate-6", pos: "left-[4%] top-10 w-[30%]" },
+  { src: "/popouts/sneaker-2.png", alt: "Olive white and black high-top sneaker", tilt: "rotate-2", pos: "left-[35%] top-0 w-[32%]" },
+  { src: "/popouts/sneaker-3.png", alt: "Green cream and red star graphic sneaker", tilt: "rotate-[9deg]", pos: "left-[64%] top-8 w-[30%]" },
 ];
 
 function Shoe({
@@ -38,13 +38,10 @@ function Shoe({
   );
 }
 
-// Sneaker cluster on the Sneakers beat, framed fit card on the
-// Streetwear beat, type-only on Community.
-const beatTransition = (delay = 0) => ({
-  duration: 0.5,
-  delay,
-  ease: [0.23, 1, 0.32, 1] as const,
-});
+// One state machine drives word + asset from the same callback — no dual
+// clocks. Assets sit centered behind the word at 60% with a soft mask;
+// the word stays full strength on top.
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 function FitCard() {
   return (
@@ -54,7 +51,7 @@ function FitCard() {
         alt="Forest Circuits&Soles hoodie with grey sweatpants"
         width={600}
         height={900}
-        className="h-[34svh] min-h-[260px] w-auto rounded-xl object-cover"
+        className="h-[44svh] min-h-[300px] w-auto rounded-xl object-cover"
         priority={false}
       />
     </div>
@@ -67,13 +64,13 @@ export function HeroCutout({ active }: { active: number }) {
   if (reduceMotion) {
     if (active === 1) {
       return (
-        <div className="pointer-events-none absolute right-[2vw] top-1/2 z-0 -translate-y-[30%]">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 opacity-60">
           <FitCard />
         </div>
       );
     }
     return active === 0 ? (
-      <div className="pointer-events-none absolute right-[2vw] top-1/2 z-0 w-[46vw] max-w-[560px] -translate-y-[30%]">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[70vw] max-w-[900px] -translate-x-1/2 -translate-y-1/2 opacity-60">
         <div className="relative h-[300px]">
           <Shoe {...SHOES[0]} />
         </div>
@@ -82,7 +79,7 @@ export function HeroCutout({ active }: { active: number }) {
   }
 
   return (
-    <div className="pointer-events-none absolute right-[2vw] top-1/2 z-0 w-[46vw] max-w-[560px] -translate-y-[30%]">
+    <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[70vw] max-w-[900px] -translate-x-1/2 -translate-y-1/2 opacity-60 [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,black_55%,transparent_100%)]">
       <AnimatePresence mode="popLayout">
         {active === 0 && (
           <motion.div
@@ -93,20 +90,20 @@ export function HeroCutout({ active }: { active: number }) {
             variants={{
               hidden: {},
               show: { transition: { staggerChildren: 0.06 } },
-              exit: { opacity: 0, y: -16, filter: "blur(2px)", transition: { duration: 0.35 } },
+              exit: { opacity: 0, scale: 0.98, filter: "blur(2px)", transition: { duration: 0.35 } },
             }}
-            className="relative h-[clamp(280px,38svh,420px)]"
+            className="relative h-[clamp(300px,44svh,480px)]"
           >
             {SHOES.map((s, i) => (
               <motion.div
                 key={s.src}
                 variants={{
-                  hidden: { opacity: 0, y: 32, filter: "blur(2px)" },
+                  hidden: { opacity: 0, scale: 0.96, filter: "blur(2px)" },
                   show: {
                     opacity: 1,
-                    y: 0,
+                    scale: 1,
                     filter: "blur(0px)",
-                    transition: beatTransition(),
+                    transition: { duration: 0.5, ease: EASE },
                   },
                 }}
                 className="absolute inset-0"
@@ -119,11 +116,11 @@ export function HeroCutout({ active }: { active: number }) {
         {active === 1 && (
           <motion.div
             key="fit-card"
-            initial={{ opacity: 0, y: 32, filter: "blur(2px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -16, filter: "blur(2px)", transition: { duration: 0.35 } }}
-            transition={beatTransition()}
-            className="relative flex justify-end"
+            initial={{ opacity: 0, scale: 0.96, filter: "blur(2px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.98, filter: "blur(2px)", transition: { duration: 0.35 } }}
+            transition={{ duration: 0.5, ease: EASE }}
+            className="relative flex justify-center"
           >
             <FitCard />
           </motion.div>
